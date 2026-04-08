@@ -4,15 +4,31 @@ backend:
     preBuild:
       commands:
         - echo "Build environment is $CODEBUILD_BUILD_IMAGE"
-        # - aws ecr-public get-login-password | docker login --username AWS --password-stdin public.ecr.aws
+        - echo "Current Node version:"
+        - node --version
+        - echo "Installing Node.js 20 from binary..."
+        - curl -fsSL https://nodejs.org/dist/v20.18.1/node-v20.18.1-linux-x64.tar.xz -o node.tar.xz
+        - tar -xf node.tar.xz
+        - export PATH=$(pwd)/node-v20.18.1-linux-x64/bin:$PATH
+        - node --version
+        - npm --version
+        - docker --version
     build:
       commands:
+        - export PATH=$(pwd)/node-v20.18.1-linux-x64/bin:$PATH
         - npm ci --cache .npm --prefer-offline
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID --debug
 frontend:
   phases:
+    preBuild:
+      commands:
+        - echo "Setting up Node.js 20 for frontend..."
+        - export PATH=$(pwd)/node-v20.18.1-linux-x64/bin:$PATH
+        - node --version
+        - npm --version
     build:
       commands:
+        - export PATH=$(pwd)/node-v20.18.1-linux-x64/bin:$PATH
         - npm run build
   artifacts:
     baseDirectory: .next
