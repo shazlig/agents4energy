@@ -44,9 +44,9 @@ export const planAndExecuteAgentFunction = defineFunction({
   entry: '../functions/planAndExecuteAgent/index.ts',
   timeoutSeconds: 900,
   environment: {
-    // MODEL_ID: 'us.anthropic.claude-3-5-sonnet-20240620-v1:0'
+    // MODEL_ID: 'us.anthropic.claude-3-5--20240620-v1:0'
     // MODEL_ID: 'us.anthropic.claude-3-5-haiku-20241022-v1:0'
-    MODEL_ID: 'anthropic.claude-sonnet-4-6'
+    MODEL_ID: 'us.anthropic.claude-sonnet-4-6'
     // MODEL_ID: 'us.anthropic.claude-3-haiku-20240307-v1:0'
   },
   runtime: 20
