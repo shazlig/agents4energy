@@ -26,7 +26,7 @@ const main = async () => {
         messages: [
             new HumanMessage({ content: "I'm the strongest, greatest, most hansome man in the world" })
         ],
-        modelId: 'anthropic.claude-sonnet-4-6',
+        modelId: 'us.anthropic.claude-sonnet-4-6',
         outputStructure: outputStructure
     })
     console.log(response)
